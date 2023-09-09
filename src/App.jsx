@@ -1,9 +1,9 @@
 function App() {
-  return (
-    <>
-        <p>Initial app</p>
-    </>
-  )
+    return (
+        <>
+            <p className="bg-purple-800 text-white font-bold">Initial app</p>
+        </>
+    )
 }
 
 export default App
