@@ -4,10 +4,18 @@ import { SlideContent } from "./SlideContent";
 import { GrFormNext, GrFormPrevious } from 'react-icons/gr'
 
 export function Slide({ children }) {
-    const { slide, prevProduct, nextProduct } = useScrollSlide(250)
+    const getX = () => {
+        const widthChildren = slide.current.firstChild.getBoundingClientRect()
+            .width
+        const widthSlide = slide.current.getBoundingClientRect().width
+
+        return widthChildren * Math.floor(widthSlide/widthChildren)
+    }
+
+    const { slide, prevProduct, nextProduct } = useScrollSlide(getX)
 
     return (
-        <div className="relative px-8 py-4">
+        <div className="relative px-8">
             <SlideButton click={prevProduct} className="left-0">
                 <GrFormPrevious size='2rem' />
             </SlideButton>
