@@ -7,6 +7,7 @@ export function createApi() {
         baseURL: import.meta.env.VITE_API_URL,
         headers: {
             'Content-Type': 'application/json',
+            'Authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJrbm9vYjA3MzNAZ21haWwuY29tIiwibmFtZSI6Ill1bGlhbiBTYW50aWFnbyIsImlhdCI6MTY5NDczMTQ5OH0.5AcU5dSiAHxqOCB-Vaxz_NiccQN00K_K0jIhQZaE_uU'
         },
     })
 

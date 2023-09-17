@@ -1,7 +1,7 @@
 export function CardHeader({ children }) {
     return (
-        <header className="py-2 w-full">
+        <div className="py-2 w-full">
             { children }
-        </header>
+        </div>
     )
 }

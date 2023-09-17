@@ -1,167 +1,35 @@
 import { CardProduct } from "../components/Card/CardProduct"
 import { Slide } from "../components/Slide/Slide"
 import { useTitle } from "../hooks/useTitle"
+import { useApi } from '../hooks/useApi.js'
+import { useEffect, useState } from "react"
 
 export function Home({ title }) {
     useTitle(title)
+    const api = useApi()
+    const [products, setProducts] = useState([])
 
+    const getProducts = async () => {
+        const { data } = await api.get('/product')
+
+        if(!data.success) {
+            console.log('Error')
+        }
+
+        setProducts(data.data)
+    }
+
+    useEffect(() => {
+        getProducts()
+    }, [])
     return (
         <>
             <Slide>
-                <CardProduct 
-                    id={1}
-                    src="https://images-americanas.b2w.io/produtos/01/00/img/54263/7/54263786P1.jpg" 
-                    title="Titulo do produto que vou criar na api"
-                    description="paragrafo do produto que vou criar na api e que deve ser grande"
-                    price={10}
-                />
-                <CardProduct 
-                    id={2}
-                    src="https://images-americanas.b2w.io/produtos/01/00/img/54263/7/54263786P1.jpg" 
-                    title="Titulo do produto que vou criar na api"
-                    description="paragrafo do produto que vou criar na api e que deve ser grande"
-                    price={10}
-                />
-                <CardProduct 
-                    id={1}
-                    src="https://images-americanas.b2w.io/produtos/01/00/img/54263/7/54263786P1.jpg" 
-                    title="Titulo do produto que vou criar na api"
-                    description="paragrafo do produto que vou criar na api e que deve ser grande"
-                    price={10}
-                />
-                <CardProduct 
-                    id={2}
-                    src="https://images-americanas.b2w.io/produtos/01/00/img/54263/7/54263786P1.jpg" 
-                    title="Titulo do produto que vou criar na api"
-                    description="paragrafo do produto que vou criar na api e que deve ser grande"
-                    price={10}
-                />
-                <CardProduct 
-                    id={1}
-                    src="https://images-americanas.b2w.io/produtos/01/00/img/54263/7/54263786P1.jpg" 
-                    title="Titulo do produto que vou criar na api"
-                    description="paragrafo do produto que vou criar na api e que deve ser grande"
-                    price={10}
-                />
-                <CardProduct 
-                    id={2}
-                    src="https://images-americanas.b2w.io/produtos/01/00/img/54263/7/54263786P1.jpg" 
-                    title="Titulo do produto que vou criar na api"
-                    description="paragrafo do produto que vou criar na api e que deve ser grande"
-                    price={10}
-                />
-                <CardProduct 
-                    id={1}
-                    src="https://images-americanas.b2w.io/produtos/01/00/img/54263/7/54263786P1.jpg" 
-                    title="Titulo do produto que vou criar na api"
-                    description="paragrafo do produto que vou criar na api e que deve ser grande"
-                    price={10}
-                />
-                <CardProduct 
-                    id={2}
-                    src="https://images-americanas.b2w.io/produtos/01/00/img/54263/7/54263786P1.jpg" 
-                    title="Titulo do produto que vou criar na api"
-                    description="paragrafo do produto que vou criar na api e que deve ser grande"
-                    price={10}
-                />
-                <CardProduct 
-                    id={1}
-                    src="https://images-americanas.b2w.io/produtos/01/00/img/54263/7/54263786P1.jpg" 
-                    title="Titulo do produto que vou criar na api"
-                    description="paragrafo do produto que vou criar na api e que deve ser grande"
-                    price={10}
-                />
-                <CardProduct 
-                    id={2}
-                    src="https://images-americanas.b2w.io/produtos/01/00/img/54263/7/54263786P1.jpg" 
-                    title="Titulo do produto que vou criar na api"
-                    description="paragrafo do produto que vou criar na api e que deve ser grande"
-                    price={10}
-                />
-                <CardProduct 
-                    id={1}
-                    src="https://images-americanas.b2w.io/produtos/01/00/img/54263/7/54263786P1.jpg" 
-                    title="Titulo do produto que vou criar na api"
-                    description="paragrafo do produto que vou criar na api e que deve ser grande"
-                    price={10}
-                />
-                <CardProduct 
-                    id={2}
-                    src="https://images-americanas.b2w.io/produtos/01/00/img/54263/7/54263786P1.jpg" 
-                    title="Titulo do produto que vou criar na api"
-                    description="paragrafo do produto que vou criar na api e que deve ser grande"
-                    price={10}
-                />
-                <CardProduct 
-                    id={1}
-                    src="https://images-americanas.b2w.io/produtos/01/00/img/54263/7/54263786P1.jpg" 
-                    title="Titulo do produto que vou criar na api"
-                    description="paragrafo do produto que vou criar na api e que deve ser grande"
-                    price={10}
-                />
-                <CardProduct 
-                    id={2}
-                    src="https://images-americanas.b2w.io/produtos/01/00/img/54263/7/54263786P1.jpg" 
-                    title="Titulo do produto que vou criar na api"
-                    description="paragrafo do produto que vou criar na api e que deve ser grande"
-                    price={10}
-                />
-                <CardProduct 
-                    id={1}
-                    src="https://images-americanas.b2w.io/produtos/01/00/img/54263/7/54263786P1.jpg" 
-                    title="Titulo do produto que vou criar na api"
-                    description="paragrafo do produto que vou criar na api e que deve ser grande"
-                    price={10}
-                />
-                <CardProduct 
-                    id={2}
-                    src="https://images-americanas.b2w.io/produtos/01/00/img/54263/7/54263786P1.jpg" 
-                    title="Titulo do produto que vou criar na api"
-                    description="paragrafo do produto que vou criar na api e que deve ser grande"
-                    price={10}
-                />
-                <CardProduct 
-                    id={1}
-                    src="https://images-americanas.b2w.io/produtos/01/00/img/54263/7/54263786P1.jpg" 
-                    title="Titulo do produto que vou criar na api"
-                    description="paragrafo do produto que vou criar na api e que deve ser grande"
-                    price={10}
-                />
-                <CardProduct 
-                    id={2}
-                    src="https://images-americanas.b2w.io/produtos/01/00/img/54263/7/54263786P1.jpg" 
-                    title="Titulo do produto que vou criar na api"
-                    description="paragrafo do produto que vou criar na api e que deve ser grande"
-                    price={10}
-                />
-                <CardProduct 
-                    id={1}
-                    src="https://images-americanas.b2w.io/produtos/01/00/img/54263/7/54263786P1.jpg" 
-                    title="Titulo do produto que vou criar na api"
-                    description="paragrafo do produto que vou criar na api e que deve ser grande"
-                    price={10}
-                />
-                <CardProduct 
-                    id={2}
-                    src="https://images-americanas.b2w.io/produtos/01/00/img/54263/7/54263786P1.jpg" 
-                    title="Titulo do produto que vou criar na api"
-                    description="paragrafo do produto que vou criar na api e que deve ser grande"
-                    price={10}
-                />
-                <CardProduct 
-                    id={1}
-                    src="https://images-americanas.b2w.io/produtos/01/00/img/54263/7/54263786P1.jpg" 
-                    title="Titulo do produto que vou criar na api"
-                    description="paragrafo do produto que vou criar na api e que deve ser grande"
-                    price={10}
-                />
-                <CardProduct 
-                    id={2}
-                    src="https://images-americanas.b2w.io/produtos/01/00/img/54263/7/54263786P1.jpg" 
-                    title="Titulo do produto que vou criar na api"
-                    description="paragrafo do produto que vou criar na api e que deve ser grande"
-                    price={10}
-                />
+                {
+                    products.map( product => (
+                        <CardProduct {...product} />
+                    ))
+                }
             </Slide>
         </>
     )

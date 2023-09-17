@@ -1,7 +1,7 @@
 export function CardFooter({ children }) {
     return (
-        <footer className="w-full">
+        <div className="w-full">
             { children }
-        </footer>
+        </div>
     )
 }
