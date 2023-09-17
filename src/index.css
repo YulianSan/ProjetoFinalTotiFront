@@ -12,3 +12,12 @@
       scrollbar-width: none;
     }
 }
+
+.text-skip-ink{
+    text-decoration-skip-ink: none;
+}
+
+.review-stars{
+    --stars: 5;
+    width: calc(19.2px * var(--stars));
+}
