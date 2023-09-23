@@ -43,45 +43,43 @@ export function Singup() {
     }
 
     return (
-        <GuestLayout>
-            <div className="flex h-screen flex-col items-center max-w-sm mx-auto">
-                <TextBold>
-                    <h1 className="text-4xl">singup</h1>
-                </TextBold>
-                <form onSubmit={handleSubmit(singup)} className="flex flex-col gap-y-4 w-full">
-                    <GroupInput id='name'>
-                        <Label>nome</Label>
-                        <Input register={register} type="name"/>
-                        <ErrorValidate>
-                            { errors?.name?.message }
-                        </ErrorValidate>
-                    </GroupInput>
-                    <GroupInput id='email'>
-                        <Label>e-mail</Label>
-                        <Input register={register} type="email"/>
-                        <ErrorValidate>
-                            { errors?.email?.message }
-                        </ErrorValidate>
-                    </GroupInput>
-                    <GroupInput id='password'>
-                        <Label>senha</Label>
-                        <InputPassword register={register} />
-                        <ErrorValidate>
-                            { errors?.password?.message }
-                        </ErrorValidate>
-                    </GroupInput>
-                    <GroupInput id='confirmPassword'>
-                        <Label>confirmar senha</Label>
-                        <InputPassword register={register} />
-                        <ErrorValidate>
-                            { errors?.confirmPassword?.message }
-                        </ErrorValidate>
-                    </GroupInput>
-                    <Button type='submit'>
-                        Fazer login
-                    </Button>
-                </form>
-            </div>
-        </GuestLayout>
+        <div className="flex h-screen flex-col items-center max-w-sm mx-auto">
+            <TextBold>
+                <h1 className="text-4xl">singup</h1>
+            </TextBold>
+            <form onSubmit={handleSubmit(singup)} className="flex flex-col gap-y-4 w-full">
+                <GroupInput id='name'>
+                    <Label>nome</Label>
+                    <Input register={register} type="name"/>
+                    <ErrorValidate>
+                        { errors?.name?.message }
+                    </ErrorValidate>
+                </GroupInput>
+                <GroupInput id='email'>
+                    <Label>e-mail</Label>
+                    <Input register={register} type="email"/>
+                    <ErrorValidate>
+                        { errors?.email?.message }
+                    </ErrorValidate>
+                </GroupInput>
+                <GroupInput id='password'>
+                    <Label>senha</Label>
+                    <InputPassword register={register} />
+                    <ErrorValidate>
+                        { errors?.password?.message }
+                    </ErrorValidate>
+                </GroupInput>
+                <GroupInput id='confirmPassword'>
+                    <Label>confirmar senha</Label>
+                    <InputPassword register={register} />
+                    <ErrorValidate>
+                        { errors?.confirmPassword?.message }
+                    </ErrorValidate>
+                </GroupInput>
+                <Button type='submit'>
+                    Fazer login
+                </Button>
+            </form>
+        </div>
     )
 }
