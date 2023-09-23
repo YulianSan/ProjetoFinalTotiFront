@@ -5,8 +5,11 @@ import './index.css'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import { Home } from './pages/Home.jsx'
 import { Login } from './pages/Login.jsx'
+import { Login as LoginStore } from './pages/Store/Login.jsx'
 import { Singup } from './pages/Singup.jsx'
 import { Product } from './pages/Product.jsx'
+import { StoreLayout } from './layouts/StoreLayout.jsx'
+import { AuthLayout } from './layouts/AuthLayout.jsx'
 
 const router = createBrowserRouter([
     {
@@ -15,7 +18,17 @@ const router = createBrowserRouter([
         children: [
             {
                 path: '/',
-                element: <Home title="Home"/>
+                element: <AuthLayout/>,
+                children: [
+                    {
+                        path: '',
+                        element: <Home title="Home" />,
+                    },
+                    {
+                        path: 'product/:id',
+                        element: <Product title="Detalhes do produto"/>
+                    },
+                ]
             },
             {
                 path: '/login',
@@ -26,8 +39,14 @@ const router = createBrowserRouter([
                 element: <Singup title="Singup"/>
             },
             {
-                path: '/product/:id',
-                element: <Product title="Detalhes do produto"/>
+                path: '/store',
+                element: <StoreLayout />,
+                children: [
+                    {
+                        path: 'login',
+                        element: <LoginStore title="Login Store" />
+                    }
+                ]
             }
         ]
     }
