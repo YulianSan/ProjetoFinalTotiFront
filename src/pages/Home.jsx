@@ -27,7 +27,7 @@ export function Home({ title }) {
             <Slide>
                 {
                     products.map( product => (
-                        <CardProduct {...product} />
+                        <CardProduct {...product} key={product.id} />
                     ))
                 }
             </Slide>
