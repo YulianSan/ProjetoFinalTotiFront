@@ -25,7 +25,7 @@ export function CardProduct({ id, title, description, price, image }) {
                         <h3 className="text-sm">{ title }</h3>
                     </TextBold>
                     <TextDescription>
-                        <p>{ description }</p>
+                        <p className="line-clamp-2 text-sm">{ description }</p>
                     </TextDescription>
                 </CardBody>
                 <CardFooter>
