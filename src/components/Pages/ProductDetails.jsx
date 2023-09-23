@@ -46,7 +46,7 @@ export function ProductDetails({
                                 </div>
                                 <TextDescription>
                                     <p className="py-4 text-base">
-                                        fugiat reprehenderit enim labore culpa sint ad nisi Lorem pariatur mollit ex esse exercitation amet. Nisi anim cupidatat excepteur officia. Reprehenderit nostrud nostrud ipsum Lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. Nostrud officia pariatur ut officia. Sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor Lorem duis laboris cupidatat officia voluptate. Culpa proident adipisicing id nulla nisi laboris ex in Lorem sunt duis officia eiusmod. Aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. Voluptate laboris sint cupidatat ullamco ut ea consectetur et est c...
+                                        { description }
                                     </p>
                                 </TextDescription>
                             </div>
@@ -65,23 +65,23 @@ export function ProductDetails({
                                             className="underline 
                                             underline-offset-[-40%] 
                                             text-skip-ink text-base">
-                                            { numberToPrice(
-                                                price + ( price * discount ) 
-                                            ) }
+                                            { numberToPrice( price ) }
                                         </span>
                                         <div 
                                             className="bg-green-500 text-white
                                             px-2 rounded-md flex items-center 
                                             gap-x-1">
                                             <AiOutlineArrowDown />
-                                            { numberToPercent(discount) }
+                                            { numberToPercent(discount/100) }
                                         </div>
                                     </div>
                                 </TextDescription>
                             }
                             <TextBold>
                                 <h3 className="text-3xl text-zinc-900">
-                                    { numberToPrice( price ) }
+                                    { numberToPrice( 
+                                        price - (price * discount/100) 
+                                    )}
                                 </h3>
                             </TextBold>
                             <TextDescription>
