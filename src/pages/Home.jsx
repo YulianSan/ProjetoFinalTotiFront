@@ -7,7 +7,7 @@ import { useEffect, useState } from "react"
 export function Home({ title }) {
     useTitle(title)
     const api = useApi()
-    const [products, setProducts] = useState([])
+    const [productsChunk, setProductsChunk] = useState([])
 
     const getProducts = async () => {
         const { data } = await api.get('/product')
@@ -16,7 +16,7 @@ export function Home({ title }) {
             console.log('Error')
         }
 
-        setProducts(data.data)
+        setProductsChunk(data.data)
     }
 
     useEffect(() => {
@@ -24,13 +24,17 @@ export function Home({ title }) {
     }, [])
     return (
         <>
-            <Slide>
-                {
-                    products.map( product => (
-                        <CardProduct {...product} key={product.id} />
-                    ))
-                }
-            </Slide>
+            {
+                productsChunk.map( products => (
+                    <Slide>
+                        {
+                            products.map( product => (
+                                <CardProduct {...product} key={product.id} />
+                            ))
+                        }
+                    </Slide>
+                ))
+            }
         </>
     )
 }
