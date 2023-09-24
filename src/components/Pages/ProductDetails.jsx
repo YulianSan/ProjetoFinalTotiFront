@@ -14,19 +14,19 @@ export function ProductDetails({
     price, 
     discount, 
     image, 
-    stars
+    store,
 }) {
     return (
-        <div className="w-full flex gap-x-4 py-6 items-start">
+        <div className="w-full flex gap-4 py-6 items-start md:flex-row flex-col">
             <div className="flex-1">
                 <Card>
                     <CardBody>
-                        <div className="py-6 px-3 flex gap-x-4">
-                            <div className="flex-[2]">
+                        <div className="py-6 px-3 gap-4 flex flex-col lg:flex-row gap-x-4">
+                            <div className="flex-[2] flex items-center justify-center">
                                 <img 
                                     loading="lazy" 
                                     src={image}
-                                    className="object-contain"
+                                    className="object-contain max-h-80"
                                 />
                             </div>
                             <div className="flex-[3]">
@@ -54,7 +54,7 @@ export function ProductDetails({
                     </CardBody>
                 </Card>
             </div>
-            <div className="max-w-sm w-full flex-none">
+            <div className="md:max-w-sm w-full flex-none">
                 <Card>
                     <CardBody>
                         <div className="py-6 px-3">
@@ -90,8 +90,8 @@ export function ProductDetails({
                                     <span>
                                         até 5x de 
                                         { numberToPrice(
-                                            (price + ( price * discount ) )/5
-                                        ) }
+                                            (price - (price * discount/100))/5
+                                        )}
 
                                     </span>
                                 </div>
@@ -106,7 +106,7 @@ export function ProductDetails({
                             </Button>
                             <TextDescription>
                                 <span>
-                                    Este produto é vendido e entregue por Amazon
+                                    Este produto é vendido e entregue por { store?.name }
                                 </span>
                             </TextDescription>
                         </div>
