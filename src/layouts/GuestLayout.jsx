@@ -1,8 +1,8 @@
-import { useNavigate } from "react-router-dom"
+import { Outlet, useNavigate } from "react-router-dom"
 import { useLocalStorage } from "../hooks/useLocalStorage"
 import { useEffect } from "react"
 
-export function GuestLayout({ children }) {
+export function GuestLayout() {
     const navigate = useNavigate();
     const [token, _] = useLocalStorage('token')
 
@@ -10,7 +10,7 @@ export function GuestLayout({ children }) {
 
     return (
         <>
-            { !token && children }
+            { !token && <Outlet /> }
         </>
     )
 }
