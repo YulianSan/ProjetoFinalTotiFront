@@ -10,6 +10,7 @@ import { Singup } from './pages/Singup.jsx'
 import { Product } from './pages/Product.jsx'
 import { StoreLayout } from './layouts/StoreLayout.jsx'
 import { AuthLayout } from './layouts/AuthLayout.jsx'
+import { GuestLayout } from './layouts/GuestLayout.jsx'
 
 const router = createBrowserRouter([
     {
@@ -31,12 +32,18 @@ const router = createBrowserRouter([
                 ]
             },
             {
-                path: '/login',
-                element: <Login title="Login"/>
-            },
-            {
-                path: '/singup',
-                element: <Singup title="Singup"/>
+                path: '/',
+                element: <GuestLayout />,
+                children: [
+                    {
+                        path: 'login',
+                        element: <Login title="Login"/>
+                    },
+                    {
+                        path: 'singup',
+                        element: <Singup title="Singup"/>
+                    },
+                ],
             },
             {
                 path: '/store',
