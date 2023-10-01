@@ -1,13 +1,16 @@
 import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
 
 let api
 
-export function createApi() {
+export function createApi(token) {
+    const navigate = useNavigate()
+
     api = axios.create({
         baseURL: import.meta.env.VITE_API_URL,
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJrbm9vYjA3MzNAZ21haWwuY29tIiwibmFtZSI6Ill1bGlhbiBTYW50aWFnbyIsImlhdCI6MTY5NDczMTQ5OH0.5AcU5dSiAHxqOCB-Vaxz_NiccQN00K_K0jIhQZaE_uU'
+            'Authorization': `Bearer ${token}`,
         },
     })
 
@@ -15,7 +18,7 @@ export function createApi() {
         (response) => response,
         (error) => {
             if (error.response?.status && error.response.status === 401) {
-                window.location.href = '/login'
+                navigate('/login')
             }
             return Promise.reject(error)
         }
@@ -24,10 +27,10 @@ export function createApi() {
     return api
 }
 
-export function useApi() {
-  if (!api) {
-    createApi()
-  }
-  return api
+export function useApi(token) {
+    if (!api) {
+        createApi(token)
+    }
+    return api
 }
 
