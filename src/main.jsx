@@ -11,6 +11,8 @@ import { Product } from './pages/Product.jsx'
 import { StoreLayout } from './layouts/StoreLayout.jsx'
 import { AuthLayout } from './layouts/AuthLayout.jsx'
 import { GuestLayout } from './layouts/GuestLayout.jsx'
+import { GuestStoreLayout } from './layouts/GuestStoreLayout.jsx'
+import { HomeStore } from './pages/Store/Home.jsx'
 
 const router = createBrowserRouter([
     {
@@ -19,7 +21,7 @@ const router = createBrowserRouter([
         children: [
             {
                 path: '/',
-                element: <AuthLayout/>,
+                element: <AuthLayout />,
                 children: [
                     {
                         path: '',
@@ -27,7 +29,7 @@ const router = createBrowserRouter([
                     },
                     {
                         path: 'product/:id',
-                        element: <Product title="Detalhes do produto"/>
+                        element: <Product title="Detalhes do produto" />
                     },
                 ]
             },
@@ -37,21 +39,31 @@ const router = createBrowserRouter([
                 children: [
                     {
                         path: 'login',
-                        element: <Login title="Login"/>
+                        element: <Login title="Login" />
                     },
                     {
                         path: 'singup',
-                        element: <Singup title="Singup"/>
+                        element: <Singup title="Singup" />
                     },
                 ],
+            },
+            {
+                path: '/store',
+                element: <GuestStoreLayout />,
+                children: [
+                    {
+                        path: 'login',
+                        element: <LoginStore title="Login Store" />
+                    }
+                ]
             },
             {
                 path: '/store',
                 element: <StoreLayout />,
                 children: [
                     {
-                        path: 'login',
-                        element: <LoginStore title="Login Store" />
+                        path: '',
+                        element: <HomeStore title="Home Store" />
                     }
                 ]
             }
@@ -60,6 +72,6 @@ const router = createBrowserRouter([
 ])
 ReactDOM.createRoot(document.getElementById('root')).render(
     <React.StrictMode>
-        <RouterProvider router={router}/>
+        <RouterProvider router={router} />
     </React.StrictMode>,
 )
