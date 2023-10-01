@@ -2,16 +2,15 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod"
 import { z } from "zod";
 import { useApi } from "../../hooks/useApi";
-import { useLocalStorage } from "../../hooks/useLocalStorage";
-import { GuestLayout } from "../../layouts/GuestLayout";
 import { useNavigate } from "react-router-dom";
 import { FormLogin } from "../../components/Form/FormLogin";
+import { useStoreContext } from "../../contexts/StoreContext";
 
 export function Login() {
     const navigate = useNavigate();
     const api = useApi()
 
-    const [_, setToken] = useLocalStorage('token')
+    const store = useStoreContext()
     const loginFormSchema = z.object({
         email: z.string()
             .min(1, 'E-mail obrigatório')
@@ -27,16 +26,16 @@ export function Login() {
     } = useForm({ resolver: zodResolver(loginFormSchema) });
 
     const login = async (data) => {
-        const { data: { token } } = await api.post('/login', data)
-        setToken(token)
-        navigate('/')
+        const { data: { token } } = await api.post('/store/login', data)
+        store.setToken(token)
+        navigate('/store/')
     }
 
     return (
-        <FormLogin 
-            handleSubmit={ handleSubmit(login) } 
-            errors={ errors } 
-            register={ register }
+        <FormLogin
+            handleSubmit={handleSubmit(login)}
+            errors={errors}
+            register={register}
         />
     )
 }

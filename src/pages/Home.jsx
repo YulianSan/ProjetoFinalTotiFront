@@ -3,16 +3,18 @@ import { Slide } from "../components/Slide/Slide"
 import { useTitle } from "../hooks/useTitle"
 import { useApi } from '../hooks/useApi.js'
 import { useEffect, useState } from "react"
+import { useUserContext } from "../contexts/UserContext"
 
 export function Home({ title }) {
     useTitle(title)
-    const api = useApi()
+    const user = useUserContext()
+    const api = useApi(user.token)
     const [productsChunk, setProductsChunk] = useState([])
 
     const getProducts = async () => {
         const { data } = await api.get('/product')
 
-        if(!data.success) {
+        if (!data.success) {
             console.log('Error')
         }
 
@@ -25,10 +27,10 @@ export function Home({ title }) {
     return (
         <>
             {
-                productsChunk.map( products => (
-                    <Slide>
+                productsChunk.map((products, index) => (
+                    <Slide key={index}>
                         {
-                            products.map( product => (
+                            products.map(product => (
                                 <CardProduct {...product} key={product.id} />
                             ))
                         }

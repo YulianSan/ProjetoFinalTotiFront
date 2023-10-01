@@ -2,10 +2,12 @@ import { useParams } from "react-router-dom"
 import { ProductDetails } from '../components/Pages/ProductDetails'
 import { useEffect, useState } from "react"
 import { useApi } from "../hooks/useApi"
+import { useUserContext } from "../contexts/UserContext"
 
 export function Product() {
     const [product, setProduct] = useState({})
-    const api = useApi()
+    const user = useUserContext()
+    const api = useApi(user.token)
     const { id } = useParams()
 
     const getProduct = async () => {
