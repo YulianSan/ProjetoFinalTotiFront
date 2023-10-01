@@ -28,9 +28,7 @@ export function createApi(token) {
 }
 
 export function useApi(token) {
-    if (!api) {
-        createApi(token)
-    }
+    createApi(token)
     return api
 }
 
