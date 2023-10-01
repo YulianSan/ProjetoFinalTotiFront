@@ -1,10 +1,11 @@
-export function Input({ type, id, register, name }) {
+export function Input({ type, id, register, name, ...rest }) {
     return (
-        <input 
+        <input
             className="py-3 px-4 w-full rounded-md"
-            type={ type }
+            type={type}
             {...register(name ?? id)}
-            id={ id } />
+            id={id}
+            {...rest} />
     )
 }
 
