@@ -7,11 +7,13 @@ import { TableRowData } from "../../components/Table/TableRowData";
 import { TableWrap } from "../../components/Table/TableWrap";
 import { useApi } from '../../hooks/useApi'
 import { useStoreContext } from "../../contexts/StoreContext";
+import { useLocation } from "react-router-dom";
 
 export function HomeStore() {
     const [products, setProducts] = useState({ rows: [] })
     const store = useStoreContext()
     const api = useApi(store.token)
+    const query = new URLSearchParams(useLocation().search);
 
     const columns = [
         {
@@ -25,7 +27,11 @@ export function HomeStore() {
     ]
 
     const fetchProduct = async () => {
-        const { data: { data } } = await api.get('/product/store')
+        const { data: { data } } = await api.get('/product/store', {
+            params: {
+                page: query.get('page') ?? 1
+            }
+        })
         setProducts(data)
     }
 
