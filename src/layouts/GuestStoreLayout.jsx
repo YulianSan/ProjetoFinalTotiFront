@@ -1,6 +1,7 @@
 import { Outlet, useNavigate } from "react-router-dom"
 import { useLocalStorage } from "../hooks/useLocalStorage"
 import { useEffect } from "react"
+import { UseStoreProvider } from "../contexts/StoreContext";
 
 export function GuestStoreLayout() {
     const navigate = useNavigate();
@@ -10,7 +11,9 @@ export function GuestStoreLayout() {
 
     return (
         <>
-            {!token && <Outlet />}
+            <UseStoreProvider>
+                {!token && <Outlet />}
+            </UseStoreProvider>
         </>
     )
 }
