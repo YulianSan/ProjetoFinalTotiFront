@@ -13,6 +13,7 @@ import { AuthLayout } from './layouts/AuthLayout.jsx'
 import { GuestLayout } from './layouts/GuestLayout.jsx'
 import { GuestStoreLayout } from './layouts/GuestStoreLayout.jsx'
 import { HomeStore } from './pages/Store/Home.jsx'
+import { ProductCreate } from './pages/Store/Product/ProductCreate.jsx'
 
 const router = createBrowserRouter([
     {
@@ -64,6 +65,10 @@ const router = createBrowserRouter([
                     {
                         path: '',
                         element: <HomeStore title="Home Store" />
+                    },
+                    {
+                        path: 'product/',
+                        element: <ProductCreate title="Produto" />
                     }
                 ]
             }
