@@ -8,6 +8,8 @@ import { TableWrap } from "../../components/Table/TableWrap";
 import { useApi } from '../../hooks/useApi'
 import { useStoreContext } from "../../contexts/StoreContext";
 import { useLocation } from "react-router-dom";
+import { ButtonIcon } from "../../components/Button/ButtonIcon";
+import { AiOutlinePlus } from "react-icons/ai";
 
 export function HomeStore() {
     const [products, setProducts] = useState({ rows: [] })
@@ -41,6 +43,12 @@ export function HomeStore() {
 
     return (
         <>
+            <div className="flex py-2 justify-end">
+                <ButtonIcon to={'/store/product'}>
+                    <AiOutlinePlus color="white" size={'18px'} />
+                    Criar produto
+                </ButtonIcon>
+            </div>
             <TableWrap columns={columns} data={products.rows}>
                 <TableHead />
                 <TableBody>
