@@ -5,7 +5,7 @@ import { Button } from "../../components/Button";
 import { ErrorValidate } from "../../components/Form/ErrorValidate";
 import { Input } from "../../components/Form/Input";
 import { TextArea } from "./TextArea";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 
 export function FormProduct({
     errors,
@@ -14,6 +14,7 @@ export function FormProduct({
     register,
     handleSubmit,
     textButton,
+    getValues
 }) {
     const canvas = useRef()
 
@@ -48,6 +49,15 @@ export function FormProduct({
             console.log('url invalid')
         }
     }
+
+    useEffect(() => {
+        setTimeout(() => {
+            const imageUrl = getValues('image')
+            if (imageUrl) {
+                fetchImage({ target: { value: imageUrl } })
+            }
+        }, 100)
+    }, [])
 
     return (
         <div className="flex flex-col min-h-screen items-center max-w-lg mx-auto">
