@@ -14,6 +14,7 @@ import { GuestLayout } from './layouts/GuestLayout.jsx'
 import { GuestStoreLayout } from './layouts/GuestStoreLayout.jsx'
 import { HomeStore } from './pages/Store/Home.jsx'
 import { ProductCreate } from './pages/Store/Product/ProductCreate.jsx'
+import { ProductUpdate } from './pages/Store/Product/ProductUpdate.jsx'
 
 const router = createBrowserRouter([
     {
@@ -69,6 +70,10 @@ const router = createBrowserRouter([
                     {
                         path: 'product/',
                         element: <ProductCreate title="Produto" />
+                    },
+                    {
+                        path: 'product/:id',
+                        element: <ProductUpdate title="Editar produto" />
                     }
                 ]
             }
