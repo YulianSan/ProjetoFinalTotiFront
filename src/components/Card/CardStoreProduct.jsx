@@ -25,11 +25,14 @@ export function CardStoreProduct({ data, column }) {
                     Price
                 </div>
                 <div className="">
-                    {data['price']}
+                    {data['price'].toLocaleString('pt-BR', {
+                        style: 'currency',
+                        currency: 'BRL',
+                    })}
                 </div>
             </div>
             <div className="flex-1 flex gap-1 items-center justify-center">
-                <ButtonEdit />
+                <ButtonEdit to={`/store/product/${data.id}`} />
                 <ButtonDelete />
             </div>
         </div>
