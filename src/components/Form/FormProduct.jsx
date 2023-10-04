@@ -14,7 +14,9 @@ export function FormProduct({
     register,
     handleSubmit,
     textButton,
-    getValues
+    getValues,
+    isValid,
+    isDirty,
 }) {
     const canvas = useRef()
 
@@ -52,7 +54,7 @@ export function FormProduct({
 
     useEffect(() => {
         setTimeout(() => {
-            const imageUrl = getValues('image')
+            const imageUrl = getValues?.('image') ?? null
             if (imageUrl) {
                 fetchImage({ target: { value: imageUrl } })
             }
@@ -81,14 +83,18 @@ export function FormProduct({
                 </GroupInput>
                 <GroupInput id='price'>
                     <Label>price</Label>
-                    <Input register={register} type="number" />
+                    <Input
+                        step={0.01}
+                        register={register} type="number" />
                     <ErrorValidate>
                         {errors?.price?.message}
                     </ErrorValidate>
                 </GroupInput>
                 <GroupInput id='discount'>
                     <Label>discount</Label>
-                    <Input register={register} type="number" />
+                    <Input
+                        step={0.01}
+                        register={register} type="number" />
                     <ErrorValidate>
                         {errors?.discount?.message}
                     </ErrorValidate>
@@ -103,7 +109,7 @@ export function FormProduct({
                 <canvas ref={canvas} width={512} height={300}>
                     Navegador sem suporte a canvas
                 </canvas>
-                <Button type='submit'>
+                <Button type='submit' disabled={!isDirty || !isValid}>
                     {textButton}
                 </Button>
             </form>
