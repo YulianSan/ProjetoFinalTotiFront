@@ -4,8 +4,11 @@ import { z } from "zod";
 import { useApi } from "../../../hooks/useApi";
 import { useStoreContext } from "../../../contexts/StoreContext";
 import { FormProduct } from "../../../components/Form/FormProduct";
+import { useNavigate } from "react-router-dom";
+import toast, { Toaster } from "react-hot-toast";
 
 export function ProductCreate() {
+    const navigate = useNavigate()
     const store = useStoreContext()
     const api = useApi(store.token)
     const loginFormSchema = z.object({
@@ -32,25 +35,37 @@ export function ProductCreate() {
     const {
         register,
         handleSubmit,
-        formState: { errors },
+        formState: { errors, isValid, isDirty },
         setError,
         clearErrors,
     } = useForm({
         resolver: zodResolver(loginFormSchema),
+        criteriaMode: 'all',
     });
 
     const createProduct = async (data) => {
-        await api.post('/product', data)
+        try {
+            await api.post('/product', data)
+            toast.success('Criado com sucesso!')
+            setTimeout(navigate, 1000, '/store/')
+        } catch (e) {
+            toast.error('Erro ao salvar')
+        }
     }
 
     return (
-        <FormProduct
-            clearErrors={clearErrors}
-            setError={setError}
-            textButton='Criar'
-            handleSubmit={handleSubmit(createProduct)}
-            errors={errors}
-            register={register}
-        />
+        <>
+            <FormProduct
+                clearErrors={clearErrors}
+                setError={setError}
+                isValid={isValid}
+                isDirty={isDirty}
+                textButton='Criar'
+                handleSubmit={handleSubmit(createProduct)}
+                errors={errors}
+                register={register}
+            />
+            <Toaster />
+        </>
     )
 }

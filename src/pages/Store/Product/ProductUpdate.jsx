@@ -5,6 +5,7 @@ import { useApi } from "../../../hooks/useApi";
 import { useStoreContext } from "../../../contexts/StoreContext";
 import { FormProduct } from "../../../components/Form/FormProduct";
 import { useParams } from "react-router-dom";
+import toast, { Toaster } from "react-hot-toast";
 
 export function ProductUpdate() {
     const store = useStoreContext()
@@ -34,35 +35,47 @@ export function ProductUpdate() {
 
     const getProduct = async () => {
         const { data: { data } } = await api.get(`store/product/${id}`)
-        console.log(data)
+
         return data
     }
 
     const {
         register,
         handleSubmit,
-        formState: { errors },
+        formState: { errors, isValid, isDirty },
         setError,
         clearErrors,
-        getValues
+        getValues,
     } = useForm({
         resolver: zodResolver(loginFormSchema),
-        defaultValues: getProduct
+        defaultValues: getProduct,
+        criteriaMode: 'all',
     });
 
     const updateProduct = async (data) => {
-        await api.put(`/product/${id}`, data)
+        try {
+            await api.put(`/product/${id}`, data)
+            toast.success('Salvo com sucesso!')
+        } catch (e) {
+            toast.error('Erro ao salvar')
+        }
+
     }
 
     return (
-        <FormProduct
-            getValues={getValues}
-            clearErrors={clearErrors}
-            setError={setError}
-            textButton='Editar'
-            handleSubmit={handleSubmit(updateProduct)}
-            errors={errors}
-            register={register}
-        />
+        <>
+            <FormProduct
+                getValues={getValues}
+                clearErrors={clearErrors}
+                setError={setError}
+                isValid={isValid}
+                isDirty={isDirty}
+                textButton='Editar'
+                handleSubmit={handleSubmit(updateProduct)}
+                errors={errors}
+                register={register}
+            />
+            <Toaster />
+        </>
     )
 }
