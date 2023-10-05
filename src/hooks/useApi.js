@@ -1,10 +1,11 @@
 import axios from 'axios'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 
 let api
 
 export function createApi(token) {
     const navigate = useNavigate()
+    const location = useLocation();
 
     api = axios.create({
         baseURL: import.meta.env.VITE_API_URL,
@@ -18,7 +19,7 @@ export function createApi(token) {
         (response) => response,
         (error) => {
             if (error.response?.status && error.response.status === 401) {
-                navigate('/login')
+                if (!location.pathname.includes('login')) { navigate('login') }
             }
             return Promise.reject(error)
         }
