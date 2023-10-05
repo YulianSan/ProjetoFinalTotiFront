@@ -5,6 +5,7 @@ import { useApi } from "../../hooks/useApi";
 import { useNavigate } from "react-router-dom";
 import { FormLogin } from "../../components/Form/FormLogin";
 import { useStoreContext } from "../../contexts/StoreContext";
+import toast, { Toaster } from "react-hot-toast";
 
 export function Login() {
     const navigate = useNavigate();
@@ -26,16 +27,23 @@ export function Login() {
     } = useForm({ resolver: zodResolver(loginFormSchema) });
 
     const login = async (data) => {
-        const { data: { token } } = await api.post('/store/login', data)
-        store.setToken(token)
-        navigate('/store/')
+        try {
+            const { data: { token } } = await api.post('/store/login', data)
+            store.setToken(token)
+            navigate('/store/')
+        } catch {
+            toast.error('Login inválido!!')
+        }
     }
 
     return (
-        <FormLogin
-            handleSubmit={handleSubmit(login)}
-            errors={errors}
-            register={register}
-        />
+        <>
+            <FormLogin
+                handleSubmit={handleSubmit(login)}
+                errors={errors}
+                register={register}
+            />
+            <Toaster />
+        </>
     )
 }
