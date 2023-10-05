@@ -2,6 +2,7 @@ import { Outlet, useNavigate } from "react-router-dom"
 import { useLocalStorage } from "../hooks/useLocalStorage"
 import { useEffect } from "react"
 import { UseUserProvider } from "../contexts/UserContext";
+import { Header } from "../components/Header/Header";
 
 export function AuthLayout() {
     const navigate = useNavigate();
@@ -11,6 +12,7 @@ export function AuthLayout() {
 
     return (
         <UseUserProvider>
+            <Header />
             {token && <Outlet />}
         </UseUserProvider>
     )
